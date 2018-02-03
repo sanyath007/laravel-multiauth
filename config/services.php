@@ -44,19 +44,19 @@ return [
     'facebook' => [
         'client_id' => '168703220418141',
         'client_secret' => '83989b455d49d05216f55ef80c3b008f',
-        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+        'redirect' => 'http://localhost:8000/login/facebook/callback',
     ],
 
     'twitter' => [
         'client_id' => 'OTIjQsWl3M2EpBLiQwXi5ulkP',
         'client_secret' => 'X38E0rECWqWplD35WdfsfA3dXBVfDfyJO1gTchziEbumuCHdDz',
-        'redirect' => 'http://localhost:8000/auth/twitter/callback',
+        'redirect' => 'http://localhost:8000/login/twitter/callback',
     ],
 
     'google' => [
-        'client_id' => '328977882463-8j1j2gku5jmcd9m6hqlg383a8f1pqo0t.apps.googleusercontent.com',
-        'client_secret' => '328977882463-8j1j2gku5jmcd9m6hqlg383a8f1pqo0t.apps.googleusercontent.com',
-        'redirect' => 'http://localhost:8000/auth/google/callback',
+        'client_id' => '581030412095-ajagijava3j2slofb0grhatdadb25grr.apps.googleusercontent.com',
+        'client_secret' => '3jQ6OC4OQlUlVxhw_vVAqT1i',
+        'redirect' => 'http://localhost:8000/login/google/callback',
     ],
 
 ];
