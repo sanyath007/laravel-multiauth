@@ -59,7 +59,22 @@
                                     Forgot Your Password?
                                 </a>
                             </div>
+
+                            <div class="col-md-8 col-md-offset-4" style="margin-top: 10px;">
+                                <a class="btn btn-primary" href="{{ url('login/facebook') }}">
+                                    Login with Facebook
+                                </a>
+
+                                <a class="btn btn-info" href="{{ url('login/twitter') }}">
+                                    Login with Twitter
+                                </a>
+
+                                <a class="btn btn-danger" href="{{ url('login/google') }}">
+                                    Login with Google
+                                </a>
+                            </div>
                         </div>
+
                     </form>
                 </div>
             </div>
