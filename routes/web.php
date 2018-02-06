@@ -12,7 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome'); //set view to laravel app
+    return view('index'); 	//set view to angularjs app
+});
+
+Route::get('/welcome', function() {
+	return view('welcome');
 });
 
 Auth::routes();
@@ -22,3 +27,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('login/{provider}', 'Auth\RegisterController@redirectToProvider');
 
 Route::get('login/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
+
+Route::group([
+	'middleware' 	=> 'api',
+	'prefix'	 	=> 'api',
+], function($router) {
+	Route::get('users', 'UserController@index');
+	Route::post('login', 'Auth\AuthenticateController@tokenAuth');
+});
