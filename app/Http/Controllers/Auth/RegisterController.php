@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Socialite;
+use Illuminate\Support\Str;
+use Mail;
+use App\Mail\VerifyEmail;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -64,11 +68,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        Session::flash('status', 'Registered! please but verify your email to activate your account');
+        $newUser = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'verifyToken' => Str::random(40),
         ]);
+
+        $verifyUser = User::findOrFail($newUser->id);
+        $this->sendEmail($verifyUser);
+    }
+
+    public function verifyEmailFirst() 
+    {
+        return view('email.verifyEmailFirst');
+    }
+
+    public function sendEmail($user)
+    {
+        Mail::to($user['email'])->send(new VerifyEmail($user));
+    }
+
+    public function sendEmailDone($email, $verifyToken)
+    {
+        $user = User::where(['email' => $email, 'verifyToken' => $verifyToken])->first();
+        if($user) {
+            User::where(['email' => $email, 'verifyToken' => $verifyToken])
+                ->update(['status' => '1', 'verifyToken' => NULL]);
+        } else {
+            return 'User not found';
+        }
     }
 
     public function redirectToProvider($provide)

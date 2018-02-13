@@ -5,6 +5,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
+
+                @if (session('status'))
+                    {{ session('status') }}    
+                @endif
+
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body">
