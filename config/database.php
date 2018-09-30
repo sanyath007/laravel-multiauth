@@ -1,5 +1,12 @@
 <?php
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
 return [
 
     /*
@@ -34,25 +41,25 @@ return [
     'connections' => [
 
         'sqlite' => [
-            'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
+            'driver'        => 'sqlite',
+            'database'      => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix'        => '',
         ],
 
         //Heroku Host
         'mysql' => [
-            'driver' => 'mysql',
-            'host' => 'us-cdbr-iron-east-05.cleardb.net',
-            'port' => '3306',
-            'database' => 'heroku_f56c7a1b7063cbf',
-            'username' => 'bd616a9a5bce2a',
-            'password' => 'c82bffed',
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
+            'driver'        => 'mysql',
+            'host'          => env('DB_HOST', $host),
+            'port'          => env('DB_PORT', '3306'),
+            'database'      => env('DB_DATABASE', $database),
+            'username'      => env('DB_USERNAME', $username),
+            'password'      => env('DB_PASSWORD', $password),
+            'unix_socket'   => env('DB_SOCKET', ''),
+            'charset'       => 'utf8',
+            'collation'     => 'utf8_unicode_ci',
+            'prefix'        => '',
+            'strict'        => false,
+            'engine'        => null,
         ],
 
         //localhost
